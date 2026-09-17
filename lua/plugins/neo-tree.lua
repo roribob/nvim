@@ -1,4 +1,4 @@
-return {
+local M1 = {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
 	dependencies = {
@@ -24,9 +24,26 @@ return {
 		},
 	},
 	keys = {
-		{ "<C-n>",     ":Neotree toggle left filesystem reveal<CR>", desc = "Open file tree", silent = true },
+		{ "<C-n>", ":Neotree toggle left filesystem reveal<CR>", desc = "Open file tree", silent = true },
 		{ "<leader>e", ":Neotree toggle left filesystem reveal<CR>", desc = "Open file tree", silent = true },
 		-- { '-',     ':Neotree float reveal_force_cwd<CR>',        desc = 'Open file tree', silent = true },
 		-- { '\\',    ':Neotree float reveal_force_cwd<cr>',        desc = 'Open file tree', silent = true },
 	},
 }
+
+local M2 = {
+	"nvim-neo-tree/neo-tree.nvim",
+	opts = {
+		filesystem = {
+			filtered_items = {
+				visible = true,
+				show_hidden_count = true,
+				hide_dotfiles = false,
+				hide_gitignored = false,
+				never_show = { ".git" },
+			},
+		},
+	},
+}
+
+return M1

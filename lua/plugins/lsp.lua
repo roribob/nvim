@@ -4,6 +4,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
 		require("lspconfig")
@@ -41,6 +42,7 @@ return {
 			vim.lsp.protocol.make_client_capabilities(),
 			require("cmp_nvim_lsp").default_capabilities()
 		)
+		capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 		vim.lsp.config("lua_ls", {
 			capabilities = capabilities,
@@ -96,17 +98,42 @@ return {
 		-- vim.lsp.enable("biome")
 
 		require("mason").setup()
-		require("mason-lspconfig").setup({
+
+		require("mason-tool-installer").setup({
 			ensure_installed = {
+				-- Formatters & Linters
+				"prettierd",
+				"stylua",
+				"prettierd",
+				"stylua",
+				"biome",
+
+				-- You can even put LSPs here to keep one master list,
+				-- but they still need to be set up in lspconfig!
 				"lua_ls",
 				"vtsls",
 				"gopls",
 				"zls",
-				"lua-language-server",
-				"stylua",
-				"biome",
-				"prettierd",
 			},
+			auto_install = true,
 		})
+
+		-- the other way of doing it..
+
+		-- require("mason-lspconfig").setup({
+		-- 	ensure_installed = {
+		-- 		"lua_ls",
+		-- 		"vtsls",
+		-- 		"gopls",
+		-- 		"zls",
+		-- 	},
+		-- })
+		-- require("mason-tool-installer").setup({
+		-- 	ensure_installed = {
+		-- 		"prettierd",
+		-- 		"stylua",
+		-- 		"biome",
+		-- 	},
+		-- })
 	end,
 }

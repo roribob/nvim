@@ -47,6 +47,8 @@ local function toggle_terminal()
   -- Start terminal if buffer is empty
   if vim.api.nvim_buf_line_count(terminal_buf) == 1 and vim.api.nvim_buf_get_lines(terminal_buf, 0, 1, false)[1] == "" then
     vim.cmd("terminal")
+    -- vim.cmd("terminal") may replace the buffer in the window, so capture the actual buffer
+    terminal_buf = vim.api.nvim_win_get_buf(terminal_win)
   end
 
   -- Enter insert mode in terminal

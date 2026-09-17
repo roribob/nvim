@@ -4,6 +4,7 @@ return {
 
 	config = function()
 		require("mini.ai").setup()
+		-- require("mini.animate").setup()
 		require("mini.diff").setup()
 		require("mini.surround").setup()
 		-- require("mini.notify").setup()

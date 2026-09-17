@@ -41,6 +41,7 @@ vim.opt.ignorecase = true
 vim.opt.incsearch = true
 -- Tells the host term to enable 24bit color instead of 8
 vim.opt.termguicolors = true
+vim.opt.laststatus = 3
 
 -- vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 --   pattern = "*",
