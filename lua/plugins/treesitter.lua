@@ -1,32 +1,28 @@
-return {
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				highlight = {
-					enable = true,
-				},
-				ensure_installed = {
-					"lua",
-					"typescript",
-					"tsx",
-					"go",
-				},
-			})
+local ensure_installed = {
+  "lua",
+  "vim",
+  "vimdoc",
+  "query",
+  "bash",
+  "markdown",
+  "markdown_inline",
+}
 
-			vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-				pattern = { ".env*", ".env.*" },
-				callback = function()
-					vim.bo.filetype = "bash"
-				end,
-			})
-		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-context",
-		opts = {
-			max_lines = 1,
-		},
-	},
+return {
+  "nvim-treesitter/nvim-treesitter",
+  lazy = false,
+  build = ":TSUpdate",
+  config = function()
+    require("nvim-treesitter").install(ensure_installed)
+
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function(args)
+        local language = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+        if language and vim.tbl_contains(ensure_installed, language) then
+          vim.treesitter.start(args.buf)
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
+    })
+  end,
 }
