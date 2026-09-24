@@ -6,9 +6,6 @@ map("n", "<leader>?", function()
 end, { desc = "Show keybindings" })
 map("n", "<leader>w", "<cmd>write<CR>", { desc = "Write buffer" })
 map("n", "<leader>q", "<cmd>quit<CR>", { desc = "Quit window" })
-map("n", "-", function()
-  require("mini.files").open(vim.api.nvim_buf_get_name(0), false)
-end, { desc = "Open file browser" })
 map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Diagnostics" })
 
 -- `J`/`K` walk the open Trouble list (and jump to the item) without leaving the

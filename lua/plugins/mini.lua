@@ -2,7 +2,8 @@ return {
   "echasnovski/mini.nvim",
   version = false,
   config = function()
-    require("mini.files").setup({
+    local files = require("mini.files")
+    files.setup({
       -- Use `l` or `<CR>` to open the selected file and close the browser.
       mappings = {
         go_in = "l",
@@ -10,6 +11,13 @@ return {
         show_help = "?",
       },
     })
+    -- Replace the built-in upward line motion with MiniFiles' documented toggle pattern.
+    vim.keymap.set("n", "-", function()
+      if files.close() == nil then
+        files.open(vim.api.nvim_buf_get_name(0), false)
+      end
+    end, { desc = "Toggle file browser" })
+
     require("mini.comment").setup()
     -- require("mini.clue").setup({}) -- Key hints; Which-key is active instead.
 
@@ -35,6 +43,9 @@ return {
     -- Keep terminal Meta bindings as aliases when Option is configured as Alt.
     vim.keymap.set("x", "<M-j>", function() MiniMove.move_selection("down") end, { desc = "Move selection down" })
     vim.keymap.set("x", "<M-k>", function() MiniMove.move_selection("up") end, { desc = "Move selection up" })
+    -- Ctrl-j normally duplicates `j`; Ctrl-k is unused in Visual mode.
+    vim.keymap.set("x", "<C-j>", function() MiniMove.move_selection("down") end, { desc = "Move selection down" })
+    vim.keymap.set("x", "<C-k>", function() MiniMove.move_selection("up") end, { desc = "Move selection up" })
 
     -- Available Mini modules. Uncomment a setup call to enable one.
     -- require("mini.ai").setup() -- Better text objects
