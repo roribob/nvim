@@ -71,9 +71,26 @@ return {
     vim.keymap.set("x", "<C-k>", function() MiniMove.move_selection("up") end, { desc = "Move selection up" })
 
     -- Available Mini modules. Uncomment a setup call to enable one.
-    -- require("mini.ai").setup() -- Better text objects
-    -- require("mini.align").setup() -- Interactive text alignment
+    require("mini.pairs").setup() -- Automatic bracket pairs
+    require("mini.tabline").setup() -- Tabline
+    require("mini.trailspace").setup() -- Trailing whitespace management
+    require("mini.visits").setup() -- Visit tracking and navigation
+    require("mini.align").setup() -- Interactive text alignment
     -- require("mini.animate").setup() -- Cursor and scroll animations
+
+    local indentscope = require("mini.indentscope")
+    indentscope.setup({
+      draw = {
+        -- animation = indentscope.gen_animation.none(),
+        animation = indentscope.gen_animation.quadratic({
+          easing = "out",
+          duration = 30,
+          unit = "total",
+        }),
+      },
+    })
+
+    -- require("mini.ai").setup() -- Better text objects
     -- require("mini.base16").setup() -- Base16 theme utilities
     -- require("mini.bracketed").setup() -- Bracket-based navigation
     -- require("mini.bufremove").setup() -- Remove buffers without closing windows
@@ -89,18 +106,13 @@ return {
     -- require("mini.hipatterns").setup() -- Pattern highlighting
     -- require("mini.hues").setup() -- Generate colorschemes
     -- require("mini.icons").setup() -- Filetype icons
-    -- require("mini.indentscope").setup() -- Indentation scope visualization
-    -- require("mini.jump").setup() -- Jump to visible text
-    -- require("mini.jump2d").setup() -- Two-dimensional jumping navigation
+    require("mini.jump").setup() -- Jump to visible text
+    require("mini.jump2d").setup() -- Two-dimensional jumping navigation
     -- require("mini.map").setup() -- Minimap
     -- require("mini.misc").setup() -- Miscellaneous utilities
     -- require("mini.notify").setup() -- Notification manager
     -- require("mini.operators").setup() -- Text operators
-    -- require("mini.pairs").setup() -- Automatic bracket pairs
     -- require("mini.sessions").setup() -- Session management
-    -- require("mini.tabline").setup() -- Tabline
     -- require("mini.test").setup() -- Testing utilities
-    -- require("mini.trailspace").setup() -- Trailing whitespace management
-    -- require("mini.visits").setup() -- Visit tracking and navigation
   end,
 }
