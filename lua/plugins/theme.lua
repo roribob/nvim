@@ -8,7 +8,7 @@ return {
         if vim.o.background == "light" then
           vim.cmd.colorscheme("tokyonight-day")
         else
-          vim.cmd.colorscheme("tokyonight")
+          vim.cmd.colorscheme("tokyonight-storm")
         end
       end
 
