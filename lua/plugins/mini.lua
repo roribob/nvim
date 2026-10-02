@@ -11,6 +11,11 @@ return {
     },
   },
   config = function()
+    -- Sensible options, mappings and autocommands (:h mini.basics).
+    -- The settings it covers are commented out in lua/config/options.lua
+    -- and lua/config/autocmds.lua.
+    require("mini.basics").setup()
+
     require("mini.pick").setup()
     require("mini.extra").setup()
 
@@ -70,7 +75,6 @@ return {
     -- require("mini.align").setup() -- Interactive text alignment
     -- require("mini.animate").setup() -- Cursor and scroll animations
     -- require("mini.base16").setup() -- Base16 theme utilities
-    -- require("mini.basics").setup() -- Basic sensible defaults
     -- require("mini.bracketed").setup() -- Bracket-based navigation
     -- require("mini.bufremove").setup() -- Remove buffers without closing windows
     -- require("mini.clue").setup() -- Keybinding hints

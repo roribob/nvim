@@ -1,11 +1,13 @@
 local group = vim.api.nvim_create_augroup("my-nvim", { clear = true })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = group,
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- Highlight yanked text. Disabled: mini.basics registers the same
+-- TextYankPost highlight (see lua/plugins/mini.lua).
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   group = group,
+--   callback = function()
+--     vim.highlight.on_yank()
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd("FileType", {
   group = group,
