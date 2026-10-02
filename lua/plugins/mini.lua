@@ -71,8 +71,8 @@ return {
     vim.keymap.set("x", "<C-k>", function() MiniMove.move_selection("up") end, { desc = "Move selection up" })
 
     -- Available Mini modules. Uncomment a setup call to enable one.
+    require("mini.statusline").setup() -- Tabline
     require("mini.pairs").setup() -- Automatic bracket pairs
-    require("mini.tabline").setup() -- Tabline
     require("mini.trailspace").setup() -- Trailing whitespace management
     require("mini.visits").setup() -- Visit tracking and navigation
     require("mini.align").setup() -- Interactive text alignment
@@ -90,6 +90,7 @@ return {
       },
     })
 
+    -- require("mini.tabline").setup() -- Tabline
     -- require("mini.ai").setup() -- Better text objects
     -- require("mini.base16").setup() -- Base16 theme utilities
     -- require("mini.bracketed").setup() -- Bracket-based navigation
