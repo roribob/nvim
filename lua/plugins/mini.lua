@@ -1,7 +1,25 @@
 return {
   "echasnovski/mini.nvim",
   version = false,
+  dependencies = {
+    {
+      "folke/which-key.nvim",
+      opts_extend = { "spec" },
+      opts = {
+        spec = { { "<leader>s", group = "Search / Help" } },
+      },
+    },
+  },
   config = function()
+    require("mini.pick").setup()
+    require("mini.extra").setup()
+
+    vim.keymap.set("n", "<leader>sk", "<cmd>Pick keymaps<CR>", { desc = "Search keymaps" })
+    vim.keymap.set("n", "<leader>sc", "<cmd>Pick commands<CR>", { desc = "Search commands" })
+    vim.keymap.set("n", "<leader>sh", "<cmd>Pick help<CR>", { desc = "Search help tags" })
+    vim.keymap.set("n", "<leader>sq", "<cmd>help quickref<CR>", { desc = "General cheat sheet" })
+    vim.keymap.set("n", "<leader>sl", "<cmd>help lsp-defaults<CR>", { desc = "LSP default bindings" })
+
     local files = require("mini.files")
     files.setup({
       -- Use `l` or `<CR>` to open the selected file and close the browser.
@@ -62,7 +80,6 @@ return {
     -- require("mini.cursorword").setup() -- Highlight word under cursor
     -- require("mini.diff").setup() -- Diff visualization
     -- require("mini.doc").setup() -- Documentation generation
-    -- require("mini.extra").setup() -- Extra text objects and mappings
     -- require("mini.fuzzy").setup() -- Fuzzy matching utilities
     -- require("mini.git").setup() -- Git integration
     -- require("mini.hipatterns").setup() -- Pattern highlighting
@@ -76,7 +93,6 @@ return {
     -- require("mini.notify").setup() -- Notification manager
     -- require("mini.operators").setup() -- Text operators
     -- require("mini.pairs").setup() -- Automatic bracket pairs
-    -- require("mini.pick").setup() -- Lightweight picker
     -- require("mini.sessions").setup() -- Session management
     -- require("mini.tabline").setup() -- Tabline
     -- require("mini.test").setup() -- Testing utilities
