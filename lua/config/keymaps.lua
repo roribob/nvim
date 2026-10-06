@@ -1,5 +1,10 @@
 local map = vim.keymap.set
 
+-- Deliberate deviation: visual < and > normally exit Visual mode.
+-- Keep the selection so repeated indentation needs no manual gv.
+map("x", "<", "<gv", { desc = "Unindent and keep selection" })
+map("x", ">", ">gv", { desc = "Indent and keep selection" })
+
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 map("n", "<leader>?", function()
   require("which-key").show({ global = false })
