@@ -5,6 +5,11 @@ local map = vim.keymap.set
 map("x", "<", "<gv", { desc = "Unindent and keep selection" })
 map("x", ">", ">gv", { desc = "Indent and keep selection" })
 
+-- Deliberate deviation: Insert mode has no default escape alias; `jj` is the
+-- near-universal convention. Cost: typing a literal "jj" now leaves Insert
+-- mode, so it must be entered with <C-v>jj.
+map("i", "jj", "<Esc>", { desc = "Leave Insert mode" })
+
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 map("n", "<leader>?", function()
   require("which-key").show({ global = false })
